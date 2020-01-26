@@ -5,31 +5,29 @@ var objectAssign = require('object-assign');
 var strictUriEncode = require('strict-uri-encode');
 var qs = require('query-string');
 
-var util = {};
+var loc = window.location;
 
-util.getPathValues = function getPathValues() {
-  return window.location.pathname
+function getPathValues() {
+  return loc.pathname
     .split('/')
-    .filter(function(chunk) {
-      return chunk !== '';
-    })
+    .filter(Boolean)
     .map(decodeUriComponent);
-};
+}
 
-util.getSearchValues = function getSearchValues() {
-  return qs.parse(window.location.search);
-};
+function getSearchValues() {
+  return qs.parse(loc.search);
+}
 
-util.getValues = function getValues() {
+function getValues() {
   return {
-    path: util.getPathValues(),
-    search: util.getSearchValues()
+    path: getPathValues(),
+    search: getSearchValues()
   };
-};
+}
 
-util.preparePath = function preparePath(pathValues) {
+function preparePath(pathValues) {
   if (pathValues == null) {
-    return window.location.pathname;
+    return loc.pathname;
   }
 
   return (
@@ -40,40 +38,43 @@ util.preparePath = function preparePath(pathValues) {
       })
       .join('')
   );
-};
+}
 
-util.prepareSearch = function prepareSearch(searchValues) {
+function prepareSearch(searchValues) {
   if (searchValues == null || Object.keys(searchValues).length === 0) {
-    return window.location.search;
+    return loc.search;
   }
 
-  var values = objectAssign({}, util.getSearchValues(), searchValues);
+  var values = objectAssign({}, getSearchValues(), searchValues);
 
   return '?' + qs.stringify(values);
-};
+}
 
-util.prepareUrl = function prepareUrl(data) {
-  return util.preparePath(data.path) + util.prepareSearch(data.search);
-};
+function prepareUrl(data) {
+  return preparePath(data.path) + prepareSearch(data.search);
+}
 
-util.getCurrentUrl = function getCurrentUrl() {
-  return window.location.pathname + window.location.search;
-};
+function getCurrentUrl() {
+  return loc.pathname + loc.search;
+}
 
-util.setUrl = function setUrl(url) {
-  window.history.pushState({}, '', url + window.location.hash);
-};
+function setUrl(url) {
+  window.history.pushState({}, '', url + loc.hash);
+}
 
-util.reflect = function reflect(data) {
-  var url = util.prepareUrl(data);
+function reflect(data) {
+  var url = prepareUrl(data);
 
-  if (url === util.getCurrentUrl()) {
+  if (url === getCurrentUrl()) {
     return false;
   }
 
-  util.setUrl(url);
+  setUrl(url);
 
   return true;
-};
+}
 
-module.exports = util;
+module.exports = {
+  getValues: getValues,
+  reflect: reflect
+};
