@@ -1,6 +1,6 @@
 {
   "name": "easy-location",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Easier URL manipulation using window.history",
   "main": "src/index.js",
   "types": "src/index.d.ts",
