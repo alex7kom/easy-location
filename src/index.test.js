@@ -3,11 +3,12 @@
 var initEasyLocation = require('.');
 
 test('should call onChange callback on start', function(done) {
-  initEasyLocation({
+  var loc = initEasyLocation({
     onChange: function() {
       done();
     }
   });
+  loc.unmount();
 });
 
 test('should call onChange callback on popstate', function(done) {
