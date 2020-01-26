@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Easier URL manipulation using window.history",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "lint": "eslint \"src/**/*.{j,t}s?(x)\"",
     "pretty": "pretty-quick",
