@@ -37,6 +37,10 @@ function initEasyLocation(opts) {
       if (util.reflect(data)) {
         callOnNewUrl();
       }
+    },
+    unmount: function() {
+      window.removeEventListener('popstate', callOnChange);
+      window.removeEventListener('popstate', callOnNewUrl);
     }
   };
 }

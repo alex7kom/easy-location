@@ -47,6 +47,10 @@ The library exposes `initEasyLocation` function which returns `easyLocation` obj
 
 Constructs a new URL from the provided `data`. `data` is an object with `path` and `search` properties, in fact, it's format is the same with the object with which `onChange(data)` is called. Both `path` and `search` are optional, and if not provided those parts of URL will not be changed.
 
+### `easyLocation#unmount()`
+
+Remove Easy Location listeners from window. `onChange` and `onNewUrl` will not be called after calling this function.
+
 ## Redux Example
 
 ```js
