@@ -4,8 +4,7 @@
   "description": "Easier URL manipulation using window.history",
   "main": "src/index.js",
   "scripts": {
-    "test": "eslint './**/*.js' && mocha tests/test.js",
-    "build": "webpack --display-modules"
+    "test": "eslint './**/*.js' && mocha tests/test.js"
   },
   "keywords": [
     "browser",
@@ -20,9 +19,7 @@
     "chai": "^4.1.2",
     "eslint": "^4.8.0",
     "jsdom": "^11.3.0",
-    "mocha": "^4.0.0",
-    "uglifyjs-webpack-plugin": "^0.4.6",
-    "webpack": "^3.6.0"
+    "mocha": "^4.0.0"
   },
   "dependencies": {
     "decode-uri-component": "^0.2.0",
