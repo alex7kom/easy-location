@@ -1,9 +1,9 @@
 'use strict';
 
-/* eslint-env browser */
 var util = require('./util');
 
-function initEasyLocation (opts) { /* eslint max-statements: "off" */
+function initEasyLocation(opts) {
+  /* eslint max-statements: "off" */
   if (typeof opts !== 'object' || opts === null) {
     throw new TypeError('No valid options provided');
   }
@@ -16,11 +16,11 @@ function initEasyLocation (opts) { /* eslint max-statements: "off" */
     throw new TypeError('onNewUrl callback is not a function');
   }
 
-  function callOnChange () {
+  function callOnChange() {
     opts.onChange(util.getValues());
   }
 
-  function callOnNewUrl () {
+  function callOnNewUrl() {
     if (opts.onNewUrl) {
       opts.onNewUrl(window.location.href);
     }
@@ -33,7 +33,7 @@ function initEasyLocation (opts) { /* eslint max-statements: "off" */
   callOnChange();
 
   return {
-    reflect: function (data) {
+    reflect: function(data) {
       if (util.reflect(data)) {
         callOnNewUrl();
       }

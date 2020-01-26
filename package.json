@@ -4,7 +4,9 @@
   "description": "Easier URL manipulation using window.history",
   "main": "src/index.js",
   "scripts": {
-    "test": "eslint './**/*.js' && mocha tests/test.js"
+    "lint": "eslint \"src/**/*.{j,t}s?(x)\"",
+    "pretty": "pretty-quick",
+    "test": "npm run lint && mocha src/tests/test.js"
   },
   "keywords": [
     "browser",
@@ -16,8 +18,9 @@
   "author": "Alexey Komarov <alex7kom@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@alex7kom/sayonara-config": "0.7.0",
     "chai": "^4.1.2",
-    "eslint": "^4.8.0",
+    "husky": "^4.2.1",
     "jsdom": "^11.3.0",
     "mocha": "^4.0.0"
   },
@@ -30,5 +33,19 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Alex7Kom/easy-location.git"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/@alex7kom/sayonara-config/src/configs/eslint-browser.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm run lint"
+    }
+  },
+  "sayonaraConfig": {
+    "sets": [
+      "browser-library",
+      "npm-package"
+    ]
   }
 }

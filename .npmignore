@@ -1,7 +1,13 @@
-node_modules
-tests
-webpack.config.js
-.gitignore
-.eslintrc.json
-.npmrc
-.travis.yml
+# ignore everything
+/*
+
+# whitelist src/
+!/src/
+
+# ignore test files
+__test__
+__snapshots__
+src/**/*.test.js
+src/**/*.spec.js
+
+## DO NOT EDIT ABOVE THIS LINE ##

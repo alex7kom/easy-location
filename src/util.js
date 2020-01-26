@@ -1,6 +1,5 @@
 'use strict';
 
-/* eslint-env browser */
 var decodeUriComponent = require('decode-uri-component');
 var objectAssign = require('object-assign');
 var strictUriEncode = require('strict-uri-encode');
@@ -8,27 +7,27 @@ var qs = require('query-string');
 
 var util = {};
 
-util.getPathValues = function getPathValues () {
+util.getPathValues = function getPathValues() {
   return window.location.pathname
     .split('/')
-    .filter(function (chunk) {
+    .filter(function(chunk) {
       return chunk !== '';
     })
     .map(decodeUriComponent);
 };
 
-util.getSearchValues = function getSearchValues () {
+util.getSearchValues = function getSearchValues() {
   return qs.parse(window.location.search);
 };
 
-util.getValues = function getValues () {
+util.getValues = function getValues() {
   return {
     path: util.getPathValues(),
     search: util.getSearchValues()
   };
 };
 
-util.preparePath = function preparePath (pathValues) {
+util.preparePath = function preparePath(pathValues) {
   if (typeof pathValues === 'undefined' || pathValues === null) {
     return window.location.pathname;
   }
@@ -37,14 +36,17 @@ util.preparePath = function preparePath (pathValues) {
     throw new TypeError('Invalid path param');
   }
 
-  return '/' + pathValues
-    .map(function (part) {
-      return strictUriEncode(part) + '/';
-    })
-    .join('');
+  return (
+    '/' +
+    pathValues
+      .map(function(part) {
+        return strictUriEncode(part) + '/';
+      })
+      .join('')
+  );
 };
 
-util.prepareSearch = function prepareSearch (searchValues) {
+util.prepareSearch = function prepareSearch(searchValues) {
   if (typeof searchValues === 'undefined' || searchValues === null) {
     return window.location.search;
   }
@@ -62,7 +64,7 @@ util.prepareSearch = function prepareSearch (searchValues) {
   return '?' + qs.stringify(values);
 };
 
-util.prepareUrl = function prepareUrl (data) {
+util.prepareUrl = function prepareUrl(data) {
   if (typeof data !== 'object' || data === null) {
     throw new TypeError('No valid data provided');
   }
@@ -70,15 +72,15 @@ util.prepareUrl = function prepareUrl (data) {
   return util.preparePath(data.path) + util.prepareSearch(data.search);
 };
 
-util.getCurrentUrl = function getCurrentUrl () {
+util.getCurrentUrl = function getCurrentUrl() {
   return window.location.pathname + window.location.search;
 };
 
-util.setUrl = function setUrl (url) {
+util.setUrl = function setUrl(url) {
   window.history.pushState({}, '', url + window.location.hash);
 };
 
-util.reflect = function reflect (data) {
+util.reflect = function reflect(data) {
   var url = util.prepareUrl(data);
 
   if (url === util.getCurrentUrl()) {
