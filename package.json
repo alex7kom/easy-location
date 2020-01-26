@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint \"src/**/*.{j,t}s?(x)\"",
     "pretty": "pretty-quick",
-    "test": "jest"
+    "test": "jest",
+    "size": "size-limit"
   },
   "keywords": [
     "browser",
@@ -19,6 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "@alex7kom/sayonara-config": "0.7.0",
+    "@size-limit/preset-small-lib": "^3.0.0",
     "husky": "^4.2.1"
   },
   "dependencies": {
@@ -59,5 +61,10 @@
       "browser-library",
       "npm-package"
     ]
-  }
+  },
+  "size-limit": [
+    {
+      "path": "src/index.js"
+    }
+  ]
 }
