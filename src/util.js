@@ -28,12 +28,8 @@ util.getValues = function getValues() {
 };
 
 util.preparePath = function preparePath(pathValues) {
-  if (typeof pathValues === 'undefined' || pathValues === null) {
+  if (pathValues == null) {
     return window.location.pathname;
-  }
-
-  if (!Array.isArray(pathValues)) {
-    throw new TypeError('Invalid path param');
   }
 
   return (
@@ -47,15 +43,7 @@ util.preparePath = function preparePath(pathValues) {
 };
 
 util.prepareSearch = function prepareSearch(searchValues) {
-  if (typeof searchValues === 'undefined' || searchValues === null) {
-    return window.location.search;
-  }
-
-  if (typeof searchValues !== 'object') {
-    throw new TypeError('Invalid search param');
-  }
-
-  if (Object.keys(searchValues).length === 0) {
+  if (searchValues == null || Object.keys(searchValues).length === 0) {
     return window.location.search;
   }
 
@@ -65,10 +53,6 @@ util.prepareSearch = function prepareSearch(searchValues) {
 };
 
 util.prepareUrl = function prepareUrl(data) {
-  if (typeof data !== 'object' || data === null) {
-    throw new TypeError('No valid data provided');
-  }
-
   return util.preparePath(data.path) + util.prepareSearch(data.search);
 };
 

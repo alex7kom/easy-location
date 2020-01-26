@@ -26,7 +26,7 @@ yarn add easy-location
 
 The library exposes `initEasyLocation` function which returns `easyLocation` object and accepts an object with two callbacks:
 
-* `onChange(data)` (required) is called first on init and then on `window`'s `popstate` event. `data` is an object with data extracted from URL, for example, for `https://example.com/apps/hello/?name=John` the data will be:
+* `onChange(data)` is called first on init and then on `window`'s `popstate` event. `data` is an object with data extracted from URL, for example, for `https://example.com/apps/hello/?name=John` the data will be:
 
 ```json
 {

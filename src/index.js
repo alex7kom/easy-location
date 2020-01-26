@@ -2,22 +2,13 @@
 
 var util = require('./util');
 
-function initEasyLocation(opts) {
-  /* eslint max-statements: "off" */
-  if (typeof opts !== 'object' || opts === null) {
-    throw new TypeError('No valid options provided');
-  }
-
-  if (typeof opts.onChange !== 'function') {
-    throw new TypeError('onChange callback is not a function');
-  }
-
-  if (opts.onNewUrl && typeof opts.onNewUrl !== 'function') {
-    throw new TypeError('onNewUrl callback is not a function');
-  }
+function initEasyLocation(_opts) {
+  var opts = _opts || {};
 
   function callOnChange() {
-    opts.onChange(util.getValues());
+    if (opts.onChange) {
+      opts.onChange(util.getValues());
+    }
   }
 
   function callOnNewUrl() {
